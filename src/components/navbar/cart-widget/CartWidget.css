@@ -1,0 +1,15 @@
+ .cart-widget {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+ }
+
+ .cart-icon {
+   width: 32px;
+   height: 32px;
+   filter: invert(1);
+ }
+
+ .cart-value {
+   font-size: 1rem;
+ }
