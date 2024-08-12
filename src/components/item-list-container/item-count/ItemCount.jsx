@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import './ItemCount.css'
 import BtnCount from "./BtnCount.jsx"
-import Product from "./Product.jsx"
 
-const ItemCount = () => {
+
+const ItemCount = ({id}) => {
   const [count, setCount] = useState(1)
 
   const sumar = () => {
@@ -16,14 +16,19 @@ const ItemCount = () => {
       setCount(count - 1)
   }
 
+  const comprar = () => {
+        console.log(`compraste ${count} unidades del producto${id}`)
+  }
+
   return (
 
     <div className="container">
-      <Product nombre="Headphones E-569" />
+      
       <div className="count">
         <BtnCount texto="-" fn={restar} />
         <span className="count2">{count}</span>
         <BtnCount texto="+" fn={sumar} />
+        <BtnCount texto="Comprar" fn={comprar} />
       </div>
     </div>
   )

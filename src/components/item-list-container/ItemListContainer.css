@@ -1,8 +1,8 @@
 .item-list-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: column; /* Por defecto, en pantallas pequeñas */
+  justify-content: flex-start;
+  align-items: center; /* Centra los elementos horizontalmente */
   font-size: 20px;
   padding: 1rem;
   border: none;
@@ -10,4 +10,19 @@
   background-color: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
   margin: 10px;
+  overflow-x: hidden; /* Oculta el scroll horizontal */
+  min-height: 100vh;
+  width: 100%; /* Asegura que el contenedor use el ancho completo disponible */
+  max-width: 1200px; /* Opcional: Ajusta el máximo ancho según tu diseño */
+  margin: 0 auto; /* Centra el contenedor si tiene un ancho máximo */
+  padding: 1rem; /* Ajusta el relleno según sea necesario */
+}
+
+@media (min-width: 768px) {
+  .item-list-container {
+    flex-direction: row; /* En pantallas grandes, los elementos se alinean en una fila */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias líneas si es necesario */
+    justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
+    align-items: flex-start; /* Alinea los elementos en la parte superior del contenedor */
+  }
 }

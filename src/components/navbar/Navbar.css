@@ -8,15 +8,40 @@
     border-radius: 14px;
     background-color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    position: sticky; /* O position: -webkit-sticky para compatibilidad con WebKit */
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    z-index: 1000; /* Asegura que el navbar esté encima de otros elementos */
+}
+
+
+
+.navbar-logo {
+    width: 80%;
+    height: auto;
 }
 
 .navbar ul {
-    list-style-type: none;
+    display: flex;
+    list-style: none;
     padding: 0;
-    margin: 5px;
-}
-
-.navbar-logo {
-    width: 30%;
-    height: auto;
-}
+  }
+  
+  .navbar ul .nav-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 1rem; /* Añade espacio a la derecha de cada enlace */
+  }
+  
+  /* Elimina el margen derecho del último enlace para evitar espacio extra */
+  .navbar ul .nav-link:last-child {
+    margin-right: 0;
+  }
+  

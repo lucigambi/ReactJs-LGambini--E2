@@ -1,0 +1,47 @@
+.card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos horizontalmente */
+  text-align: center; /* Centra el texto */
+  justify-content: flex-start;
+  padding: 2rem;
+  border: none;
+  border-radius: 14px;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4);
+  margin: 10px; /* Ajusta el margen para evitar el scroll horizontal */
+  width: 100%; /* Asegura que el contenedor ocupe el ancho disponible */
+  max-width: 300px; /* Establece un ancho máximo para los elementos */
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto del elemento */
+}
+
+.item-image-container {
+  height: 200px; /* Ajusta la altura según sea necesario */
+  width: 100%; /* Ocupa el ancho completo del contenedor */
+  display: flex;
+  justify-content: center; /* Centra la imagen horizontalmente */
+  align-items: center; /* Centra la imagen verticalmente */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+  border-radius: 20px;
+  background-color: white;
+  border: 10px solid rgb(255, 255, 255);
+}
+
+.item-image {
+  height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+  width: auto; /* Mantiene la relación de aspecto de la imagen */
+}
+
+.item-description {
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* Centra el texto */
+  padding: 0px;
+  margin: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.item-price {
+  font-size: 3rem;
+  margin: 0px;
+  padding-bottom: 20px;
+}
