@@ -1,0 +1,20 @@
+.item-detail-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Centra el contenido verticalmente */
+    align-items: center;     /* Centra el contenido horizontalmente */
+    font-size: 20px;
+    padding: 1rem;
+    border: none;
+    border-radius: 14px;
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    margin: 10px auto;      /* Centrará el contenedor horizontalmente */
+    overflow-x: hidden;
+    min-height: 100vh;
+    width: 70%;
+    max-width: 1200px;     /* Limita el ancho máximo del contenedor */
+  }
+
+  
+/* Estilos para pantallas más grandes */

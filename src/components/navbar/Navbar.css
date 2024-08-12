@@ -1,47 +1,71 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    margin: 10px;
-    border: none;
-    border-radius: 14px;
-    background-color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    position: sticky; /* O position: -webkit-sticky para compatibilidad con WebKit */
-    top: 0;
-    left: 0;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    background-color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    z-index: 1000; /* Asegura que el navbar esté encima de otros elementos */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1e1d1d;
+  color: #fff;
+  border-bottom: 1px solid #444;
+  border-radius: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  margin-top: 0;
 }
-
 
 
 .navbar-logo {
-    width: 80%;
-    height: auto;
+  height: 40px;
+  padding-right: 20px;
 }
 
+
 .navbar ul {
-    display: flex;
-    list-style: none;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin: 0 1rem;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
     padding: 0;
   }
-  
-  .navbar ul .nav-link {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 1rem; /* Añade espacio a la derecha de cada enlace */
+
+  .navbar li {
+    margin: 0.5rem 0;
   }
-  
-  /* Elimina el margen derecho del último enlace para evitar espacio extra */
-  .navbar ul .nav-link:last-child {
-    margin-right: 0;
+
+  .navbar-logo {
+    margin-bottom: 1rem;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+}

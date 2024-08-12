@@ -1,45 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { getProductos } from '../../asyncMock'
 import './ItemListContainer.css'
 import Item from './item/Item'
 import Spinner from './spinner/Spinner'
-import {useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-const ItemListContainer = ({ bienvenida }) => {
-  
+const ItemListContainer = () => {
+
   const [productos, setProductos] = useState([])
   const [cargando, setCargando] = useState(true)
 
   const { categoryName } = useParams()
-  
+
   useEffect(() => {
-    // getProductos()
-    // .then((res) => setProductos(res))
-    // .catch()
-    // .finally(() => setCargando(false))
 
     setCargando(true)
 
     if (categoryName) {
       fetch(`https://fakestoreapi.com/products/category/${categoryName}`)
-      .then(data => data.json())
-      .then(res => setProductos(res))
-      .catch(error => console.error('Error fetching data:', error))
+        .then(data => data.json())
+        .then(res => setProductos(res))
+        .catch(error => console.error('Error fetching data:', error))
         .finally(() => setCargando(false))
 
-    } else { 
+    } else {
 
-
-
-    fetch("https://fakestoreapi.com/products")
-      .then(data => data.json())
-      .then(res => setProductos(res))
-      .catch(error => console.error('Error fetching data:', error))
+      fetch("https://fakestoreapi.com/products")
+        .then(data => data.json())
+        .then(res => setProductos(res))
+        .catch(error => console.error('Error fetching data:', error))
         .finally(() => setCargando(false))
-      }
+    }
 
   }, [categoryName])
-  
+
   if (cargando) {
     return (
       <div className="loading-container">
@@ -50,7 +43,7 @@ const ItemListContainer = ({ bienvenida }) => {
 
   return (
     <div className="item-list-container">
-      {bienvenida}
+      
       {productos.map((el) => (
         <Item key={el.id} producto={el} />
       ))}
