@@ -19,7 +19,7 @@ const Item = ({ producto }) => {
       <p className="item-price">${price}</p>
 
       <Link className="btn" to={`/detalle/${id}`}>VER DETALLES</Link>
-      <ItemCount />
+     
     </div>
   )
 }

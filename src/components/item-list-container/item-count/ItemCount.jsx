@@ -3,7 +3,7 @@ import './ItemCount.css'
 import BtnCount from "./BtnCount.jsx"
 
 
-const ItemCount = ({id}) => {
+const ItemCount = ({id, handleComprar}) => {
   const [count, setCount] = useState(1)
 
   const sumar = () => {
@@ -16,9 +16,6 @@ const ItemCount = ({id}) => {
       setCount(count - 1)
   }
 
-  const comprar = () => {
-        console.log(`compraste ${count} unidades del producto${id}`)
-  }
 
   return (
 
@@ -28,7 +25,7 @@ const ItemCount = ({id}) => {
         <BtnCount texto="-" fn={restar} />
         <span className="count2">{count}</span>
         <BtnCount texto="+" fn={sumar} />
-        <BtnCount texto="Comprar" fn={comprar} />
+        <button onClick={()=>handleComprar(count)}>COMPRAR</button>
       </div>
     </div>
   )

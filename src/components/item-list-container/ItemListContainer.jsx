@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './ItemListContainer.css'
 import Item from './item/Item'
 import Spinner from './spinner/Spinner'
 import { useParams } from "react-router-dom"
+import { CartContext } from '../../context/CartContext'
+import { Cart } from '../Cart/Cart'
 
 const ItemListContainer = () => {
 
   const [productos, setProductos] = useState([])
   const [cargando, setCargando] = useState(true)
 
+  const { contexto, cart} = useContext(CartContext)
+
   const { categoryName } = useParams()
+
+console.log("CERRITO", cart)
 
   useEffect(() => {
 
@@ -47,6 +53,7 @@ const ItemListContainer = () => {
       {productos.map((el) => (
         <Item key={el.id} producto={el} />
       ))}
+      <h3 onClick={()=>setCart([1,2,3,4,5])}>{contexto}</h3>
     </div>
   )
 }

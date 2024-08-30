@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import CartWidget from './cart-widget/CartWidget';
-import logo from '../../assets/logo.png';
-import './Navbar.css';
-import { Link } from 'react-router-dom';
+import CartWidget from './cart-widget/CartWidget'
+import logo from '../../assets/logo.png'
+import './Navbar.css'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -25,7 +25,7 @@ const Navbar = () => {
           categorias.length > 0 && categorias.map(e => <Link key={e} to={`/categoria/${e}`} className="nav-link">{e + ""}</Link>)
         }
       </ul>
-      <CartWidget />
+      <Link to="/cart"><CartWidget /></Link>
     </div>
   )
 }
