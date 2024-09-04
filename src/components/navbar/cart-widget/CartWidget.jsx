@@ -1,7 +1,7 @@
 import  { useContext } from 'react'
 import './CartWidget.css';
 import cartIcon from '../../../assets/cart-icon.svg'
-import { CartContext } from '../../../context/CartContext';
+import { CartContext } from '../../../context/CartContext'
 
 
 const CartWidget = () => {

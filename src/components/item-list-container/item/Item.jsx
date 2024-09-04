@@ -1,7 +1,6 @@
 import React from 'react'
 import './Item.css'
-import ItemCount from '../item-count/ItemCount';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const Item = ({ producto }) => {
 

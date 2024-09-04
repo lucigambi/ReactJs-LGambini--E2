@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import './ItemCount.css'
 import BtnCount from "./BtnCount.jsx"
-import cartIcon from '../../../assets/cart-icon.svg';
+import cartIcon from '../../../assets/cart-icon.svg'
 
 const ItemCount = ({id, handleComprar}) => {
   const [count, setCount] = useState(1)

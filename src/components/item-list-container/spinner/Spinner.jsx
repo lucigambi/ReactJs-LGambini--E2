@@ -7,4 +7,4 @@ const TestSpinner = () => {
   )
 }
 
-export default TestSpinner;
+export default TestSpinner

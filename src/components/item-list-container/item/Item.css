@@ -1,5 +1,5 @@
 .item-card {
-  flex: 1 1 calc(25% - 10px); /* 4 tarjetas por fila en pantallas grandes */
+  flex: 1 1 calc(25% - 10px);
   margin: 2.5px;
   max-width: 280px;
   box-sizing: border-box;
@@ -10,20 +10,20 @@
 
 @media (max-width: 767px) {
   .item-card {
-    flex: 1 1 calc(50% - 10px); /* 2 tarjetas por fila en pantallas pequeñas */
+    flex: 1 1 calc(50% - 10px); 
   }
 }
 
 .item-image {
-  width: 100%; /* O el ancho que desees para el contenedor */
-  overflow: hidden; /* Asegura que no se salgan del contenedor */
+  width: 100%; 
+  overflow: hidden; 
 }
 
 .item-image-container {
-  display: block; /* Elimina el espacio debajo de la imagen */
-  width: 100%; /* La imagen se adapta al 100% del contenedor */
-  height: auto; /* Mantiene la relación de aspecto de la imagen */
-  object-fit: cover; /* Opcional: cubre el contenedor sin deformar la imagen */
+  display: block; 
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; 
 }
 
 .item-description {

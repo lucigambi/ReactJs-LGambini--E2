@@ -1,4 +1,4 @@
-/* General Styles */
+
 .checkout-container {
   display: flex;
   flex-direction: column;
@@ -13,8 +13,6 @@
 .form {
     display: flex;
     flex-direction: column;
-   
-  
   }
   
   .form label {
@@ -85,7 +83,7 @@
     color: #ff6633;
   }
 
-  /* Mobile Styles */
+
   @media (max-width: 480px) {
     .form {
       padding: 15px;
