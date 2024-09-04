@@ -1,53 +1,77 @@
-import { useEffect, useState } from 'react';
-import Spinner from '../spinner/Spinner';
+import { useEffect, useState } from 'react'
+import Spinner from '../spinner/Spinner'
 import './ItemDetailContainer.css'
-import { ItemDetail } from '../ItemDetail/ItemDetail';
-import { useNavigate, useParams } from 'react-router-dom';
-
+import { ItemDetail } from '../ItemDetail/ItemDetail'
+import { useNavigate, useParams } from 'react-router-dom'
+import { db } from '../../../services/firebaseConfig'
+import { getDoc, doc, collection, query, orderBy, getDocs } from 'firebase/firestore'
 
 const ItemDetailContainer = () => {
-
   const [productos, setProductos] = useState({})
   const [cargando, setCargando] = useState(true)
+  const [orderedProductIds, setOrderedProductIds] = useState([])
 
   const { id } = useParams()
   const navigate = useNavigate()
 
+  const fetchOrderedProductIds = async () => {
+    const productosRef = collection(db, "productos")
+    const q = query(productosRef, orderBy("orderIndex"))
+    const querySnapshot = await getDocs(q)
+    const ids = querySnapshot.docs.map(doc => doc.id)
+    setOrderedProductIds(ids)
+  };
 
   const mostrarSiguiente = () => {
-    let ruta = id * 1 + 1
-    navigate(`/detalle/${ruta}`)
-  }
+    const currentIndex = orderedProductIds.indexOf(id)
+    if (currentIndex < orderedProductIds.length - 1) {
+      const nextId = orderedProductIds[currentIndex + 1]
+      navigate(`/detalle/${nextId}`)
+    }
+  };
 
   const mostrarAnterior = () => {
-    if (id > 0) {
-      let ruta = id * 1 - 1
-      navigate(`/detalle/${ruta}`)
+    const currentIndex = orderedProductIds.indexOf(id)
+    if (currentIndex > 0) {
+      const prevId = orderedProductIds[currentIndex - 1]
+      navigate(`/detalle/${prevId}`);
     }
-  }
+  };
 
   useEffect(() => {
+    const fetchProducto = async () => {
+      setCargando(true);
+      try {
+        const productoRef = doc(db, "productos", id)
+        const docSnap = await getDoc(productoRef)
 
-    setCargando(true)
+        if (docSnap.exists()) {
+          setProductos({ id: docSnap.id, ...docSnap.data() })
+        } else {
+          console.log("No such document!")
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error)
+      } finally {
+        setCargando(false)
+      }
+    };
 
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(data => data.json())
-      .then(res => setProductos(res))
-      .catch(error => console.error('Error fetching data:', error))
-      .finally(() => setCargando(false))
-
+    fetchProducto()
+    fetchOrderedProductIds()
   }, [id])
 
-  if (cargando) {
-    return (
-      <div className="loading-container">
-        <Spinner />
-      </div>
-    )
-  }
-
   return (
-    <div className="item-detail-container"><ItemDetail producto={productos} mostrarSiguiente={mostrarSiguiente} mostrarAnterior={mostrarAnterior} /></div>
+    <div className="item-list-detail-container">
+      {cargando ? (
+        <div className="loading-container">
+          <Spinner />
+        </div>
+      ) : (
+        <ItemDetail producto={productos} mostrarSiguiente={mostrarSiguiente} mostrarAnterior={mostrarAnterior} />
+      )}
+    </div>
   )
 }
+
 export default ItemDetailContainer

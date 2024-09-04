@@ -7,19 +7,19 @@ const Item = ({ producto }) => {
 
 
 
-  const { id, image, title, description, price } = producto
+  const { id, image, title, price, category } = producto
 
   return (
-    <div className="card-item">
-      <h4>{title}</h4>
+    <div className="item-card">
+      <p className="item-title">{title}</p>
+      <p className="item-category">{category}</p>
       <div className="item-image-container">
         <img className="item-image" src={image} alt={`foto del producto ${title}`} />
       </div>
-      <p className="item-description">{description}</p>
-      <p className="item-price">${price}</p>
+<p className="item-number">${price}</p>
 
       <Link className="btn" to={`/detalle/${id}`}>VER DETALLES</Link>
-     
+
     </div>
   )
 }

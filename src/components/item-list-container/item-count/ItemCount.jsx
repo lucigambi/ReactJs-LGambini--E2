@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import './ItemCount.css'
 import BtnCount from "./BtnCount.jsx"
-
+import cartIcon from '../../../assets/cart-icon.svg';
 
 const ItemCount = ({id, handleComprar}) => {
   const [count, setCount] = useState(1)
@@ -25,7 +25,7 @@ const ItemCount = ({id, handleComprar}) => {
         <BtnCount texto="-" fn={restar} />
         <span className="count2">{count}</span>
         <BtnCount texto="+" fn={sumar} />
-        <button onClick={()=>handleComprar(count)}>COMPRAR</button>
+        <button className="btn-comprar" onClick={()=>handleComprar(count)}><img src={cartIcon} alt="Cart Icon" className="cart-icon" />COMPRAR</button>
       </div>
     </div>
   )

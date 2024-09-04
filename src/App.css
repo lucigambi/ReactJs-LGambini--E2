@@ -1,7 +1,5 @@
 #root {
   font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
   font-style: normal;
   max-width: 100%;
   margin: 0 auto;
@@ -20,3 +18,4 @@ body {
   box-sizing: border-box;
   font-family: "Outfit", sans-serif;
 }
+

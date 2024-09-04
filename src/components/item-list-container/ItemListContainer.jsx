@@ -1,42 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './ItemListContainer.css'
+
 import Item from './item/Item'
 import Spinner from './spinner/Spinner'
 import { useParams } from "react-router-dom"
 import { CartContext } from '../../context/CartContext'
-import { Cart } from '../Cart/Cart'
+import { db } from '../../services/firebaseConfig';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'
+import ItemListBanner from './ItemListBanner'
 
 const ItemListContainer = () => {
-
   const [productos, setProductos] = useState([])
   const [cargando, setCargando] = useState(true)
-
-  const { contexto, cart} = useContext(CartContext)
-
+  const { contexto } = useContext(CartContext)
   const { categoryName } = useParams()
 
-console.log("CERRITO", cart)
-
   useEffect(() => {
-
     setCargando(true)
 
-    if (categoryName) {
-      fetch(`https://fakestoreapi.com/products/category/${categoryName}`)
-        .then(data => data.json())
-        .then(res => setProductos(res))
-        .catch(error => console.error('Error fetching data:', error))
-        .finally(() => setCargando(false))
+    const fetchData = async () => {
+      try {
+        let querySnapshot
+        if (categoryName) {
+          const prodsPorCat = query(
+            collection(db, "productos"),
+            where("category", "==", categoryName),
+            orderBy("orderIndex") 
+          )
+          querySnapshot = await getDocs(prodsPorCat)
+        } else {
+          const productosRef = query(
+            collection(db, "productos"),
+            orderBy("orderIndex") 
+          );
+          querySnapshot = await getDocs(productosRef)
+        }
 
-    } else {
+        const productosList = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        setProductos(productosList)
+      } catch (error) {
+        console.error("Error fetching products: ", error)
+      } finally {
+        setCargando(false)
+      }
+    };
 
-      fetch("https://fakestoreapi.com/products")
-        .then(data => data.json())
-        .then(res => setProductos(res))
-        .catch(error => console.error('Error fetching data:', error))
-        .finally(() => setCargando(false))
-    }
-
+    fetchData();
   }, [categoryName])
 
   if (cargando) {
@@ -48,12 +57,19 @@ console.log("CERRITO", cart)
   }
 
   return (
+    <div>
+    <ItemListBanner />
     <div className="item-list-container">
       
-      {productos.map((el) => (
-        <Item key={el.id} producto={el} />
-      ))}
-      <h3 onClick={()=>setCart([1,2,3,4,5])}>{contexto}</h3>
+      {productos.length === 0 ? (
+        <p>No se encontraron productos para esta categoría</p>
+      ) : (
+        productos.map((el) => (
+          <Item key={el.id} producto={el} />
+        ))
+      )}
+      
+      </div>
     </div>
   )
 }

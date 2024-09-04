@@ -1,28 +1,26 @@
 .item-list-container {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center; 
-  font-size: 20px;
-  padding: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Ajusta el espacio entre las tarjetas */
   border: none;
-  border-radius: 14px;
-  background-color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-  margin: 10px;
-  overflow-x: hidden; 
-  min-height: 100vh;
+  background-color: #ffffff;
+  padding-top: 10px;
   width: 100%;
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem; 
 }
 
-@media (min-width: 768px) {
-  .item-list-container {
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: flex-start; 
-  }
+.item-list-banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Ajusta el espacio entre las tarjetas */
+  border: none;
+  background-color: #4bda13;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }

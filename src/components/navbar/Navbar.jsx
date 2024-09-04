@@ -3,18 +3,34 @@ import CartWidget from './cart-widget/CartWidget'
 import logo from '../../assets/logo.png'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
+import { db } from '../../services/firebaseConfig'
+import { collection, getDocs } from 'firebase/firestore'
 
 const Navbar = () => {
 
   const [categorias, setCategorias] = useState([])
 
   useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const categoriasRef = collection(db, 'productos')
+        const querySnapshot = await getDocs(categoriasRef)
+        const categoriasUnicas = new Set()
 
-    fetch("https://fakestoreapi.com/products/categories")
-      .then(data => data.json())
-      .then(res => setCategorias(res))
-      .catch(error => console.error('Error fetching data:', error))
+        querySnapshot.forEach((doc) => {
+          const { category } = doc.data()
+          if (category) {
+            categoriasUnicas.add(category)
+          }
+        })
 
+        setCategorias([...categoriasUnicas])
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+      }
+    };
+
+    fetchCategorias()
   }, [])
 
   return (
@@ -22,7 +38,11 @@ const Navbar = () => {
       <Link to="/"><img src={logo} alt="Logo" className="navbar-logo" /></Link>
       <ul>
         {
-          categorias.length > 0 && categorias.map(e => <Link key={e} to={`/categoria/${e}`} className="nav-link">{e + ""}</Link>)
+          categorias.length > 0 && categorias.map((categoria) => (
+            <Link key={categoria} to={`/categoria/${categoria}`} className="nav-link">
+              {categoria}
+            </Link>
+          ))
         }
       </ul>
       <Link to="/cart"><CartWidget /></Link>
