@@ -1,29 +1,29 @@
-import React, { useState, useContext } from 'react';
-import { CartContext } from '../context/CartContext';
-import { db } from '../services/firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
-import './Checkout.css';
+import React, { useState, useContext } from 'react'
+import { CartContext } from '../context/CartContext'
+import { db } from '../services/firebaseConfig'
+import { collection, addDoc } from 'firebase/firestore'
+import './Checkout.css'
 
 const Checkout = () => {
-    const [nombre, setNombre] = useState('');
-    const [email, setEmail] = useState('');
-    const [direccion, setDireccion] = useState('');
-    const [ordenId, setOrdenId] = useState(null);
-    const [error, setError] = useState(null);
-    const [isSubmiting, setIsSubmiting] = useState(false);
 
-    const { cart, totalCarrito, vaciarCarrito } = useContext(CartContext);
+    const [nombre, setNombre] = useState('')
+    const [email, setEmail] = useState('')
+    const [direccion, setDireccion] = useState('')
+    const [ordenId, setOrdenId] = useState(null)
+    const [error, setError] = useState(null)
+    const [isSubmiting, setIsSubmiting] = useState(false)
+    const { cart, totalCarrito, vaciarCarrito } = useContext(CartContext)
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        // Verificación de campos vacíos
         if (!nombre || !email || !direccion) {
-            setError("Todos los campos son obligatorios.");
-            return; // Evita el envío del formulario si hay campos vacíos
+            console.log("Detecto campos vacios ------->")
+            setError("Todos los campos son obligatorios.")
+            return;
         }
 
-        setIsSubmiting(true);
+        setIsSubmiting(true)
 
         const nuevaOrden = {
             comprador: {
@@ -34,21 +34,30 @@ const Checkout = () => {
             items: cart,
             total: totalCarrito(),
             fecha: new Date()
-        };
+        }
+
+        console.log('Datos de la orden: ------->', nuevaOrden)
 
         try {
-            const docRef = await addDoc(collection(db, "ordenes"), nuevaOrden);
-            setOrdenId(docRef.id);
-            setError(null); // Limpia el mensaje de error si la orden se creó con éxito
-            vaciarCarrito();
+
+            const docRef = await addDoc(collection(db, "ordenes"), nuevaOrden)
+            console.log("Orden creada con el ID ------->: ", docRef.id)
+
+            setOrdenId(docRef.id)
+            setIsSubmiting(false)
+            setError(null)
+            vaciarCarrito()
+            console.log("El carrito vuelve a 0 ------->")
+
+            console.log('ID de la orden: ------->', docRef.id)
         } catch (error) {
-            console.error("Error al crear la orden: ", error);
-            setError("No se pudo crear la orden. ¡Inténtalo de nuevo!");
-            setOrdenId(null);
-        } finally {
-            setIsSubmiting(false); // Asegúrate de que esta línea esté en el bloque finally
+            console.error("Error al crear la orden: ", error)
+            setError("No se pudo crear la orden. ¡Inténtalo de nuevo!")
+            setOrdenId(null)
         }
-    };
+    }
+
+    console.log('Estado de la ordenId:------->', ordenId)
 
     return (
         <div className="checkout-container">
@@ -72,6 +81,7 @@ const Checkout = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+
                 />
 
                 <label htmlFor="direccion">Dirección</label>
@@ -84,14 +94,14 @@ const Checkout = () => {
                     required
                 />
 
-                <button type="submit" disabled={isSubmiting} className="btn-submit">Enviar</button>
+                <button type="submit" disabled={isSubmiting} className="btn-submit">ENVIAR</button>
             </form>
 
-            {/* Mostrar mensajes de error o éxito */}
             {ordenId && <p className="order-message">¡Tu orden fue creada con el ID: {ordenId}!</p>}
             {error && <p className="order-message">{error}</p>}
-        </div>
-    );
-};
 
-export default Checkout;
+        </div>
+    )
+}
+
+export default Checkout
