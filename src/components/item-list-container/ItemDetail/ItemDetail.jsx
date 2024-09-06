@@ -6,9 +6,9 @@ import { CartContext } from '../../../context/CartContext'
 
 export const ItemDetail = ({ producto, mostrarSiguiente, mostrarAnterior }) => {
 
-  const { contexto, agregarAlCarrito } = useContext(CartContext)
+  const { agregarAlCarrito } = useContext(CartContext)
 
-  const { id, image, title, price, detailDescription, category } = producto
+  const { image, title, price, detailDescription, category } = producto
 
   const handleComprar = (count) => {
     agregarAlCarrito({ ...producto, cantidad: count })
@@ -16,8 +16,8 @@ export const ItemDetail = ({ producto, mostrarSiguiente, mostrarAnterior }) => {
 
   return (
     <div className="item-detail-card">
-      
-     
+
+
       <div className="item-detail-image-container">
         <img className="item-detail-image" src={image} alt={`foto del producto ${title}`} />
       </div>
@@ -26,13 +26,13 @@ export const ItemDetail = ({ producto, mostrarSiguiente, mostrarAnterior }) => {
         <button className="btn-nav-items" onClick={mostrarSiguiente}>Ver siguiente</button>
       </div>
       <p className="item-title">{title}{" / "} {category}{" / "} ${price}</p>
-   
+
       <p className="item-detail-description">{detailDescription}</p>
-     
-      
-      <ItemCount id={id} handleComprar={handleComprar} />
-    
-    
+
+
+      <ItemCount handleComprar={handleComprar} />
+
+
     </div>
   )
 }

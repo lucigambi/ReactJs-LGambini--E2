@@ -10,20 +10,13 @@ const Checkout = () => {
     const [direccion, setDireccion] = useState('');
     const [ordenId, setOrdenId] = useState(null);
     const [error, setError] = useState(null);
-    const [isSubmiting, setIsSubmiting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const { cart, totalCarrito, vaciarCarrito } = useContext(CartContext);
+    const { cart, vaciarCarrito, totalCarrito } = useContext(CartContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Verificación de campos vacíos
-        if (!nombre || !email || !direccion) {
-            setError("Todos los campos son obligatorios.");
-            return; // Evita el envío del formulario si hay campos vacíos
-        }
-
-        setIsSubmiting(true);
+        setIsSubmitting(true);
 
         const nuevaOrden = {
             comprador: {
@@ -39,16 +32,29 @@ const Checkout = () => {
         try {
             const docRef = await addDoc(collection(db, "ordenes"), nuevaOrden);
             setOrdenId(docRef.id);
-            setError(null); // Limpia el mensaje de error si la orden se creó con éxito
+            setError(null);
             vaciarCarrito();
+
+            
+            setEmail("");
+            setNombre("");
+            setDireccion("");
         } catch (error) {
             console.error("Error al crear la orden: ", error);
             setError("No se pudo crear la orden. ¡Inténtalo de nuevo!");
             setOrdenId(null);
         } finally {
-            setIsSubmiting(false); // Asegúrate de que esta línea esté en el bloque finally
+            setIsSubmitting(false);
         }
     };
+
+    if (ordenId) {
+        return (
+            <div className="checkout-container">
+                <p className="order-message">¡Gracias por tu compra! Tu orden fue creada con el ID: {ordenId}</p>
+            </div>
+        );
+    }
 
     return (
         <div className="checkout-container">
@@ -62,6 +68,7 @@ const Checkout = () => {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     required
+                    disabled={isSubmitting}
                 />
 
                 <label htmlFor="email">Email</label>
@@ -72,6 +79,7 @@ const Checkout = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    disabled={isSubmitting}
                 />
 
                 <label htmlFor="direccion">Dirección</label>
@@ -82,13 +90,14 @@ const Checkout = () => {
                     value={direccion}
                     onChange={(e) => setDireccion(e.target.value)}
                     required
+                    disabled={isSubmitting}
                 />
 
-                <button type="submit" disabled={isSubmiting} className="btn-submit">Enviar</button>
+                <button type="submit" className="btn-submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Enviando...' : 'Enviar'}
+                </button>
             </form>
 
-            {/* Mostrar mensajes de error o éxito */}
-            {ordenId && <p className="order-message">¡Tu orden fue creada con el ID: {ordenId}!</p>}
             {error && <p className="order-message">{error}</p>}
         </div>
     );

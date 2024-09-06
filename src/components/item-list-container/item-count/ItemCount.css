@@ -12,9 +12,9 @@
 }
 
 .btn-comprar {
-  display: flex; /* Cambiado a flex para alinear verticalmente */
-  align-items: center; /* Alinea verticalmente al centro */
-  justify-content: center; /* Centra el contenido horizontalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: "Outfit", sans-serif;
   font-size: 16px;
   font-optical-sizing: auto;
@@ -38,7 +38,7 @@
   width: 32px;
   height: 32px;
   filter: invert(1);
-  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  margin-right: 8px;
 }
 
 .btn-comprar:hover {

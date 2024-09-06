@@ -3,7 +3,7 @@ import './ItemCount.css'
 import BtnCount from "./BtnCount.jsx"
 import cartIcon from '../../../assets/cart-icon.svg'
 
-const ItemCount = ({id, handleComprar}) => {
+const ItemCount = ({ handleComprar }) => {
   const [count, setCount] = useState(1)
 
   const sumar = () => {
@@ -20,12 +20,12 @@ const ItemCount = ({id, handleComprar}) => {
   return (
 
     <div className="container">
-      
+
       <div className="count">
         <BtnCount texto="-" fn={restar} />
         <span className="count2">{count}</span>
         <BtnCount texto="+" fn={sumar} />
-        <button className="btn-comprar" onClick={()=>handleComprar(count)}><img src={cartIcon} alt="Cart Icon" className="cart-icon" />COMPRAR</button>
+        <button className="btn-comprar" onClick={() => handleComprar(count)}><img src={cartIcon} alt="Cart Icon" className="cart-icon" />COMPRAR</button>
       </div>
     </div>
   )

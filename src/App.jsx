@@ -5,7 +5,6 @@ import ItemDetailContainer from './components/item-list-container/ItemDetailCont
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Cart } from './components/Cart/Cart.jsx'
 import { CartContextProvider } from './context/CartContext.jsx'
-import CartWidget from './components/navbar/cart-widget/CartWidget.jsx'
 import Checkout from './components/Checkout.jsx'
 
 function App() {
