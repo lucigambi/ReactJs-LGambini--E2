@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import { db } from '../services/firebaseConfig'
-
 import { collection, addDoc } from 'firebase/firestore'
 import './Checkout.css'
 
@@ -12,13 +11,13 @@ const Checkout = () => {
     const [direccion, setDireccion] = useState('')
     const [ordenId, setOrdenId] = useState(null)
     const [error, setError] = useState(null)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
-
-    const { cart, totalCarrito, vaciarCarrito } = useContext(CartContext)
+    const { cart, vaciarCarrito, totalCarrito } = useContext(CartContext)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        setIsSubmitting(true)
 
         const nuevaOrden = {
             comprador: {
@@ -31,29 +30,37 @@ const Checkout = () => {
             fecha: new Date()
         }
 
-        console.log('Datos de la orden: ------->', nuevaOrden)
+        console.log("Datos de la orden", nuevaOrden)
 
         try {
-
             const docRef = await addDoc(collection(db, "ordenes"), nuevaOrden)
-            console.log("Orden creada con el ID ------->: ", docRef.id)
-
+            console.log("Orden creada con el ID", docRef.id)
 
             setOrdenId(docRef.id)
             setError(null)
             vaciarCarrito()
+
+            setEmail("")
+            setNombre("")
+            setDireccion("")
             console.log("El carrito vuelve a 0 ------->")
-
-
-            console.log('ID de la orden: ------->', docRef.id)
         } catch (error) {
             console.error("Error al crear la orden: ", error)
             setError("No se pudo crear la orden. ¡Inténtalo de nuevo!")
             setOrdenId(null)
+        } finally {
+            setIsSubmitting(false)
         }
     }
 
-    console.log('Estado de la ordenId:------->', ordenId)
+
+    if (ordenId) {
+        return (
+            <div className="checkout-container">
+                <p className="order-message">¡Gracias por tu compra! Tu orden fue creada con el ID: {ordenId}</p>
+            </div>
+        )
+    }
 
     return (
         <div className="checkout-container">
@@ -67,6 +74,7 @@ const Checkout = () => {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     required
+                    disabled={isSubmitting}
                 />
 
                 <label htmlFor="email">Email</label>
@@ -77,6 +85,7 @@ const Checkout = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    disabled={isSubmitting}
                 />
 
                 <label htmlFor="direccion">Dirección</label>
@@ -87,13 +96,14 @@ const Checkout = () => {
                     value={direccion}
                     onChange={(e) => setDireccion(e.target.value)}
                     required
+                    disabled={isSubmitting}
                 />
 
-                <button type="submit" className="btn-submit">Enviar</button>
+                <button type="submit" className="btn-submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'Enviando...' : 'Enviar'}
+                </button>
             </form>
 
-
-            {ordenId && <p className="order-message">¡Tu orden fue creada con el ID: {ordenId}!</p>}
             {error && <p className="order-message">{error}</p>}
         </div>
     )

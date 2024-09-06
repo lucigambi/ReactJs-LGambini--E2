@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px; /* Ajusta el espacio entre las tarjetas */
+  gap: 10px;
   border: none;
   background-color: #ffffff;
   padding-top: 10px;
@@ -11,16 +11,29 @@
   margin: 0 auto;
 }
 
-.item-list-banner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px; /* Ajusta el espacio entre las tarjetas */
-  border: none;
-  background-color: #4bda13;
-  margin: 0px;
-  padding: 0px;
+
+
+.banner-web {
+  display: block;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: auto;
+  padding-top: 2px;
+}
+
+
+.banner-mobile {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+
+@media (max-width: 768px) {
+  .banner-web {
+    display: none;
+  }
+
+  .banner-mobile {
+    display: block;
+  }
 }

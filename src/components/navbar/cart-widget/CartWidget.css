@@ -12,4 +12,10 @@
 
  .cart-value {
    font-size: 1rem;
+   text-decoration: none;
+   color: white;
+ }
+
+ .cart-value:hover {
+   text-decoration: none;
  }

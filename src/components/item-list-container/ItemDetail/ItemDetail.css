@@ -1,90 +1,90 @@
-
 .btn-container {
-    display: flex;
-    justify-content: center; 
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    background-color: #33b4c3;
-  }
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: #33b4c3;
+}
 
 
-  .item-detail-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    border: none;
-    padding: 0px;
-    margin: 0px; 
-    width: 100%; 
-    max-width: 50%; /* Asegúrate de que el ancho no exceda el del contenedor padre */
-    
-  }
-  .item-detail-image {
-    width: 100%; /* O el ancho que desees para el contenedor */
-    overflow: hidden; /* Asegura que no se salgan del contenedor */
-    padding: 0px;
-    margin: 0px;
-  }
-  
-  .item-detail-image-container {
-    display: block; /* Elimina el espacio debajo de la imagen */
-    width: 100%; /* La imagen se adapta al 100% del contenedor */
-    height: auto; /* Mantiene la relación de aspecto de la imagen */
-    object-fit: cover; /* Opcional: cubre el contenedor sin deformar la imagen */
-    padding: 0px;
-    margin: 0px;
-    vertical-align: bottom;
-  }
-  
-  .item-detail-description {
-    display: flex;
-    flex-direction: column;
-    text-align: left; 
-    padding: 0px;
-    margin: 0;
-    font-size: 1rem;
-    color: #7f7e7e;
-  }
-  
-  .item-detail-number {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    color: #7f7e7e;
-  }
-  
-  .item-detail-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    color: #ff6633;
-  }
-  
-  .item-detail-category {
-    font-size: 1.2rem;
-    margin: 0px;
-    padding-top: 0px;
-    padding-bottom: 10px;
-    color: #7f7e7e;
-  }
-  
-  .navbar ul .nav-link {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 1rem;
-  }
-  
-  .btn-nav-items {
-    display: inline-block;
+.item-detail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  max-width: 50%;
+
+}
+
+.item-detail-image {
+  width: 100%;
+  overflow: hidden;
+  padding: 0px;
+  margin: 0px;
+}
+
+.item-detail-image-container {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  padding: 0px;
+  margin: 0px;
+  vertical-align: bottom;
+}
+
+.item-detail-description {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0px;
+  margin: 0;
+  font-size: 1rem;
+  color: #7f7e7e;
+}
+
+.item-detail-number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: #7f7e7e;
+}
+
+.item-detail-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  color: #ff6633;
+}
+
+.item-detail-category {
+  font-size: 1.2rem;
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  color: #7f7e7e;
+}
+
+.navbar ul .nav-link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.btn-nav-items {
+  display: inline-block;
   font-family: "Outfit", sans-serif;
   font-size: 16px;
   font-optical-sizing: auto;
@@ -102,16 +102,15 @@
   transition: 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   text-decoration: none;
   margin-bottom: 0px;
-  }
+}
 
-  .btn-nav-items:hover {
-    background: linear-gradient(180deg, #5c5c5c, #333);
-    text-decoration: none;
-  }
-  
-  .btn-nav-items:active {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transform: translateY(2px);
-    text-decoration: none;
-  }
-  
+.btn-nav-items:hover {
+  background: linear-gradient(180deg, #5c5c5c, #333);
+  text-decoration: none;
+}
+
+.btn-nav-items:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
+  text-decoration: none;
+}
